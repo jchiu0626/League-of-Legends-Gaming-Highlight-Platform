@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>League of Legends Outplays and Comrades{% block page-title %}{% endblock %}</title>
+        {% block css-import %}{% endblock %}
+        {% block js-import %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/global.css" %}">
+          <!-- Import font-awesome icons -->
+        <script src="https://kit.fontawesome.com/13d58ad85a.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+    <!-- Header -->
+    <div id="header">
+        {% if request.session.username %}
+            <div id="title-box-and-info">
+                <div id="title-box">
+                    <img id="logo" src="{% static "img/logo.jpg" %}" alt="Logo">
+                    <h1>League of Legends Outplays and Comrades</h1>
+                    <h2>Show your outplays and find your comrades!</h2>
+                </div>
+                <div id="info">
+                    <div>
+                        <i class="fa-solid fa-user"></i>
+                        <a href="{% url "users:profile" request.session.username %}"><strong>{{ request.session.username }}</strong></a>
+                    </div>
+                    <a href="{% url "users:logout" %}" class="button-style">Log Out</a>
+                    <a href="{% url "loloutplays:add-story" %}" class="button-style">Upload Your Outplays</a>
+                    <form id="search">
+                        <input type="text" name="search" placeholder="Search for outplays">
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <div id="title-box-and-login-box">
+                <div id="title-box">
+                    <img id="logo" src="{% static "img/logo.jpg" %}" alt="Logo">
+                    <h1>League of Legends Outplays and Comrades</h1>
+                    <h2>Show your outplays and find your comrades!</h2>
+                </div>
+                <div id="login-box">
+                    <form action="{% url "users:login" %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <div id="submit-and-text">
+                            <input type="submit" name="submit" value="Log in"> or <a href="{% url 'users:register' %}">Register</a>
+                        </div>
+                    </form>
+                    <form id="search">
+                        <input type="text" name="search" placeholder="Search for outplays">
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <div id="primary-nav-div">
+            <ul id="primary-nav">
+                <li><a href="{% url "loloutplays:loloutplay_home" %}">Home</a></li>
+                <li><a href="#">My Outplays</a></li>
+                <li><a href="{% url "loloutplays:loloutplays_story_list" %}">Comrades and Outplays</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Content -->
+    <div id="content">
+        <ul id="side-tabs">
+            {% block side-tabs %}{% endblock %}
+        </ul>
+        <div id="outplays">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <!-- Footer -->
+    <div id="footer">
+        <p><a href="#">Home</a> | <a href="#">My Outplays</a> |
+            <a href="#">Find Comrade and Outplays</a></p>
+        <p>Copyright 2023 League of Legends Outplays and Comrades</p>
+    </div>
+    </body>
+</html>

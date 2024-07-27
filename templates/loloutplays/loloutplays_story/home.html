@@ -1,0 +1,24 @@
+{% extends "loloutplays/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <h1>Welcome to League of Legends Outplays and Comrades!</h1>
+    <h3>Login/Sign up to explore more outplays and start finding comrades!</h3>
+    <h2>Trending outplays</h2>
+    {% for story in stories %}
+        {% if forloop.counter <= 3 %}
+            <div class="video">
+                <a href="{% url "loloutplays:story-detail" story.id %}">{{ story.title }}</a>
+                <video class="video" controls>
+                    {% with video_url=story.video %}
+                        <source src="{% static video_url %}" type="video/webm">
+                    {% endwith %}
+                    Your browser does not support this video format.
+                </video>
+                <p class="news-byline">Submitted by&nbsp;<a href="#">{{ story.author }}</a>,
+                    {{ story.date_posted|naturaltime }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

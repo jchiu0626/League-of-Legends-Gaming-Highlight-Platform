@@ -1,0 +1,381 @@
+/* Import google font */
+@import url("https://fonts.googleapis.com/css?family=Alegreya+SC");
+@import url("https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+html, body {
+    margin: 0; padding: 0;
+}
+
+h1{
+    font-family: "Alegreya SC", serif;
+    font-size: 200%;
+}
+
+h2, h3{
+    font-family: "Alegreya SC", serif;
+}
+
+p, a, button, input {
+    font-family: "Aleo", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+div#header {
+    display: flex;
+    flex-direction: column;
+    background-color: #D1DEFC;
+    padding: 0 12.5em 0 12.5em;
+}
+
+div#title-box-and-login-box {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 1em 0 1em;
+    text-align: center;
+    align-items: center;
+}
+
+div#title-box {
+    float: left;
+    width: 50em;
+}
+
+div#title-box img {
+    float: left;
+    width: 10em;
+    margin: 0 1em 0.25em 0.25em;
+}
+
+div#login-box {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    width: 10em;
+}
+
+.button-style {
+    font-size: 14px;
+    text-align: center;
+    background-color: #F0F0F0;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-top: 7%;
+    width: 100%;
+    text-decoration: none;
+}
+
+
+div#title-box-and-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 1em 0 1em;
+}
+
+div#title-box-and-info button{
+    height: 2em;
+}
+
+div#info {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    width: 10em;
+}
+
+div#info div, div#info button, div#info input[type="text"], div#info input[type="submit"]{
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 5px;
+}
+
+div#login-box input[type="text"],
+div#login-box input[type="password"] {
+    margin-top: 1em;
+    border-radius: 5px;
+    width: 100%;
+}
+
+div#login-box div#submit-and-text {
+    margin-top: 1em;
+}
+
+div#primary-nav-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+ul#primary-nav {
+    clear: left;
+    width: 100%;
+    padding-left: 1em;
+    list-style-type: none;
+    background-color: cornflowerblue;
+}
+
+ul#primary-nav li {
+    float: left;
+}
+
+ul#primary-nav li a {
+    display: block;
+    text-decoration: none;
+    padding: 0.75em 1em;
+    background-color: cornflowerblue;
+    color: #fff;
+}
+
+#primary-nav li a.selected, #primary-nav li a:hover {
+    background-color: #0492C2;
+}
+
+div#content {
+    display: flex;
+    margin: 1.25em 12.5em 0 12.5em;
+}
+
+div#search-not-found {
+    margin: 1.25em 12.5em 0 12.5em;
+}
+
+ul#side-tabs {
+    float: left;
+    list-style-type: none;
+}
+
+ul#side-tabs li a {
+    display: block;
+    text-decoration: none;
+    padding: 0.75em;
+    width: 5em;
+    background-color: #D9D2D1;
+    color: #fff;
+}
+
+#side-tabs a.selected, #side-tabs a:hover {
+    background-color: #757171;
+}
+
+div#outplays {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 12.5em 0 0;
+}
+
+div#outplays h2 {
+    margin-left: 1.25em;
+    font-size: 200%;
+}
+
+.video {
+    margin: 1em 1em 6em 1em;
+    width: 30em;
+    height: 16em;
+}
+
+.video > a {
+    margin-left: 1em;
+}
+
+video {
+    margin: 1em 1em 1em 1em;
+}
+
+.news-byline {
+    margin-top: -5em;
+    margin-left: 1em;
+}
+
+div#videos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div#footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12.5em 0 12.5em;
+    clear: left;
+    background-color: #D1DEFC;
+}
+
+div#footer p {
+    padding: 1.25em;
+}
+
+ul.messages {
+    font-weight: bold;
+    padding: 1em;
+    list-style-type: none;
+    margin: 0;
+}
+
+ul.messages li.success {
+    background-color: lightgreen;
+    padding: 1em;
+    margin: 0.25em;
+}
+
+ul.messages li.info {
+    background-color: #63c5da;
+    padding: 1em;
+    margin: 0.25em;
+}
+
+ul.messages li.warning {
+    background-color: red;
+    padding: 1em;
+    margin: 0.25em;
+}
+
+ul.messages li.error {
+    background-color: red;
+    padding: 1em;
+    margin: 0.25em;
+}
+
+#sorting-button {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2em;
+}
+
+#edit-user, #register-user {
+    display: flex;
+    flex-direction: column;
+    max-width: 25em;
+}
+
+#edit-user label, #edit-user input, #register-user label, #register-user input, #edit-user-role select, #edit-user-role input, #register-user select {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#edit-user-role {
+    display: flex;
+    flex-direction: column;
+    max-width: 5em;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 175%;
+    }
+
+    h2, h3, p, a {
+        font-size: 100%;
+        margin: 0 0 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div#header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    div#title-box {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    div#title-box img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    div#title-box-and-login-box {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    div#title-box-and-info {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    div#info div {
+        width: 10em;
+    }
+
+    div#videos {
+        padding: 0;
+        margin: 0;
+    }
+
+    video.video {
+        margin: 0;
+    }
+
+    .video {
+        width: 100%;
+    }
+
+    .news-byline{
+        margin-top: 1em;
+    }
+
+    div#title-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul#primary-nav {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+    }
+
+    ul#side-tabs li {
+        width: 16.6667%;
+        border: 1px solid #757171;
+    }
+
+    ul#side-tabs li a {
+        width: 100%;
+        font-size: 70%;
+        padding: 10% 0 10% 0;
+        text-align: center;
+    }
+
+    div#content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul#side-tabs {
+        display: flex;
+        padding: 0;
+    }
+
+    div#content, div#outplays {
+        margin: 0;
+    }
+
+    div#discussion p {
+        justify-content: left;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    div#footer {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+    }
+}

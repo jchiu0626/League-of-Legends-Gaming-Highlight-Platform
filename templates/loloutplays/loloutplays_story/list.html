@@ -1,0 +1,39 @@
+{% extends "loloutplays/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block page-title %} | Outplays{% endblock %}
+
+{% block side-tabs %}
+    <li><a href="list_login.html" class="selected">Assassin</a></li>
+    <li><a href="list_login.html">Fighter</a></li>
+    <li><a href="list_login.html">Mage</a></li>
+    <li><a href="list_login.html">Marksman</a></li>
+    <li><a href="list_login.html">Support</a></li>
+    <li><a href="list_login.html">Tank</a></li>
+{% endblock %}
+
+{% block content %}
+    <h2>Enjoy outplays and find comrades!</h2>
+    <div id="sorting-button">
+        <a href="?sort=title">Sort by Title</a>
+        <a href="?sort=-date_posted">Sort by Date (Descending)</a>
+    </div>
+    <div id="videos">
+    {% for story in stories %}
+        <div class="video">
+            <a href="{% url "loloutplays:story-detail" story.id %}">{{ story.title }}</a>
+            <video class="video" controls>
+                {% with video_url=story.video %}
+                    <source src="{% static video_url %}" type="video/webm">
+                {% endwith %}
+                Your browser does not support this video format.
+            </video>
+            <p class="news-byline">Posted by&nbsp;<a href="{% url "users:profile" story.user.username %}">
+                {{ story.user.username }}</a>, {{ story.date_posted|naturaltime }}</p>
+        </div>
+    {% empty %}
+        <h2>There are no news stories right now.</h2>
+    {% endfor %}
+    </div>
+{% endblock %}

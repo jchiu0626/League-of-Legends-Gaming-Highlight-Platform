@@ -1,0 +1,57 @@
+div#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div#item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+div#item h3 {
+    margin-top: 1%;
+    font-size: 175%;
+    text-align: center;
+}
+
+video.video {
+    width: 80%;
+    height: 80%;
+    margin: 0 10% 1% 10%;
+}
+
+div#item p {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+div#item form {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+div#discussion {
+    margin-left: 10%;
+}
+
+input#comment-box {
+    margin-bottom: 2em;
+    padding: 5px 0;
+    width: 80%;
+}
+
+input#submit-comment {
+    margin-bottom: 2em;
+    padding: 5px 0;
+    width: 10%;
+}
+
+p#comment {
+    margin-bottom: 0.75em;
+}
+
+.edit-comment-form {
+    display: none;
+}

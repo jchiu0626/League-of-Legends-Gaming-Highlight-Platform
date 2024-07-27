@@ -1,0 +1,9 @@
+{% extends "loloutplays/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <h3>Welcome to your dashboard</h3>
+    {% include 'actions/action/feed.html' %}
+{% endblock %}

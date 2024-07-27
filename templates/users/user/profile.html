@@ -1,0 +1,66 @@
+{% extends "loloutplays/base.html" %}
+{% load humanize %}
+{% load static %}
+
+{% block page-title %} | Profile for {{ user.username }}{% endblock %}
+
+{% block content %}
+
+    <h3>Profile for {{ user.username }}</h3>
+    <div>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>First Name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Email Address:</strong> {{ user.email }}</p>
+        <p><strong>Role:</strong> {{ user.details.role }}</p>
+        <p><strong>Gender:</strong> {{ user.details.gender }}</p>
+    </div>
+    <ul>
+        {% for action in actions %}
+            {% if action.user.username == user.username %}
+                <li> {{ action.verb }} "<a href="{{ action.target.get_absolute_url }}">{{ action.target }}"</a>
+                    ({{ action.created|naturaltime }})</li>
+            {% endif %}
+
+            {% empty %}
+                <li>No activity yet.</li>
+        {% endfor %}
+    </ul>
+    {% if request.session.role == 'admin' or request.session.username == user.username %}
+        <div>
+            <h3>Edit user</h3>
+            <form id="edit-user" action="{% url "users:edit-profile" user.username%}" method="POST">
+                <p>* = required</p>
+
+                <label for="edit-firstname">First Name*</label>
+                <input id="edit-firstname" name="firstname" type="text" required>
+
+                <label for="edit-lastname">Last Name*</label>
+                <input id="edit-lastname" name="lastname" type="text" required>
+
+                <label for="edit-email">Email*</label>
+                <input id="edit-email" name="email" type="email" required>
+
+                <label for="edit-password">Password*</label>
+                <input id="edit-password" name="password" type="password" required>
+
+                <input type="submit" name="submit" value="Submit change">
+                {% csrf_token %}
+            </form>
+        </div>
+    {% endif %}
+    {% if request.session.role == 'admin'%}
+        <div>
+            <h3>Edit user's role</h3>
+            <form id="edit-user-role" action="{% url "users:edit-role" user.username%}" method="POST">
+                <select id="dropdown-menu" name="user-role" required>
+                    <option value="regular" selected>Regular</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <input type="submit" name="submit" value="Submit">
+                {% csrf_token %}
+            </form>
+        </div>
+    {% endif %}
+
+{% endblock %}

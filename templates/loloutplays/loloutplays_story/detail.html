@@ -1,0 +1,65 @@
+{% extends "loloutplays/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block page-title %} | Detail{% endblock %}
+
+{% block css-import %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/detail.css" %}">
+{% endblock %}
+
+{% block js-import %}
+    <script src="{% static "js/jquery-3.7.1.min.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="item">
+        <h3>{{ story.title }}</h3>
+        <video class="video" controls>
+            {% with video_url=story.video %}
+                <source src="{% static video_url %}" type="video/webm">
+            {% endwith %}
+            Your browser does not support this video format.
+        </video>
+        <p>Posted by {{ story.author }}</p>
+        {% if story.description == "" %}
+            <p>No description</p>
+        {% else %}
+            <p>Description: {{ story.description }}</p>
+        {% endif %}
+        {% if request.session.role == "admin" %}
+            <form action="{% url 'loloutplays:delete-story' story.id %}" method="POST" onsubmit="return confirmDelete()">
+                {% csrf_token %}
+                <input type="submit" value="Delete as an admin">
+            </form>
+        {% endif %}
+    </div>
+    <div id="discussion">
+        {% if request.session.username == story.author %}
+            <a href="{% url "loloutplays:edit-story" story.id  %}">Edit outplay</a>
+        {% endif %}
+        <h3>Comments:</h3>
+        {% for comment in comments %}
+            <p id="comment"><a href="{% url "users:profile" comment.author.username %}">
+                {{ comment.author.username }}</a>: {{ comment.text }} ({{ comment.date_posted|naturaltime }})</p>
+            {% if request.session.username == comment.author.username or request.session.role == "admin"%}
+                <a href="{% url "loloutplays:edit-comment" comment.id  %}">Edit comment</a>
+                <form action="{% url 'loloutplays:delete-comment' comment.id %}" method="post" style="display: inline;"
+                      onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete comment" />
+                </form>
+            {% endif %}
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+        {% if request.session.username %}
+            <form id="comment-form" action="{% url 'loloutplays:add-comment' story.id %}" method="post">
+                {% csrf_token %}
+                <input id="comment-box" type="text" name="text" placeholder="Write a comment...">
+                <input id="submit-comment" type="submit" value="Send">
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

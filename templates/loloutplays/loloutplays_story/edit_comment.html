@@ -1,0 +1,17 @@
+{% extends "loloutplays/base.html" %}
+{% load static %}
+
+{% block page-title %} | Edit Comment{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Edit Comment</h2>
+        <form action="{% url 'loloutplays:edit-comment' comment.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea class="form-control" id="commentText" name="text" rows="3">{{ comment.text }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Comment</button>
+        </form>
+    </div>
+{% endblock %}

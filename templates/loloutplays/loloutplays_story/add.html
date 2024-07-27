@@ -1,0 +1,37 @@
+{% extends "loloutplays/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block page-title %}: Submit new outplay{% endblock %}
+
+{% block css-import %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/upload_page.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        {% if request.session.username %}
+            <div id="upload">
+                <form id="title description upload-video" action="{% url 'loloutplays:add-story' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="title" placeholder="Title: " required>
+                    <input type="text" name="description" placeholder="Description: ">
+                    <input type="file" name="file" required>
+                    <select id="dropdown-menu" name="role" required>
+                        <option value="" selected>Role</option>
+                        <option value="Assassin">Assassin</option>
+                        <option value="Fighter">Fighter</option>
+                        <option value="Mage">Mage</option>
+                        <option value="Marksman">Marksman</option>
+                        <option value="Support">Support</option>
+                        <option value="Tank">Tank</option>
+                    </select>
+                    <button type="submit">Upload</button>
+                    <input type="hidden" name="author" value="{{ request.session.username }}">
+                </form>
+            </div>
+        {% else %}
+            <h1>Log in to upload your outplay and find comrades</h1>
+        {% endif %}
+    </div>
+{% endblock %}
